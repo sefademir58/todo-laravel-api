@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TodoController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,9 @@ Route::controller(TodoController::class)->group(function() {
     Route::put('/todo/{id}/completed/{status}','status');
     Route::put('/edit/{id}', 'update');
     Route::delete('/delete/{id}', 'destroy');
+});
+
+Route::controller(UserController::class)->group(function() {
+    Route::get('/login', 'login');
+    Route::post('/register', 'register');
 });

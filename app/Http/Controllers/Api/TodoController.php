@@ -13,9 +13,9 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $list= Todo::all();
+        $list= Todo::where('user_id', $request->id)->get();
         return $list;
     }
 
@@ -31,7 +31,7 @@ class TodoController extends Controller
         $todo->title = $request->title;
         $todo->content= $request->content;
         $todo->status= 'Tamamlanmadı';
-        $todo->user_id= 2;
+        $todo->user_id= 1;
 
         $todo->save();
         return response()->json(['message' => 'Todo Başarıyla Eklendi.']);
@@ -68,11 +68,11 @@ class TodoController extends Controller
         $todo= Todo::findOrFail($request->id);
         if ($title) {
             $todo->title= $request->title;
-        } else if ($content) {
+        }else if ($content) {
             $todo->content= $request->content;
-        } else if ($status) {
+        }else if ($status) {
             $todo->status= $request->status;
-        } else {
+        }else {
             $todo->title= $request->title;
             $todo->content= $request->content;
             $todo->status= $request->status;
