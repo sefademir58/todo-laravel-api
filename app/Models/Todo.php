@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Todo extends Model
 {
     use HasFactory;
-    protected $fillable = ['username', 'password'];
+    protected $fillable = ['title', 'content', 'status'];
 }
