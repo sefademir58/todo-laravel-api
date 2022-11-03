@@ -15,16 +15,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
-            'test1' => '12345',
-            'test2' => 'qwerty'
-        ];
-        foreach ($data as $key => $value) {
-            DB::table('users')->insert([
-                'username' => $key,
-                'password' => md5($value)
-           ]);
-        }
-       
+        DB::table('users')->insert([
+            'firstname' => 'Sefa',
+            'lastname' => 'Demir',
+            'username' => 'test1',
+            'password' => md5(12345)
+        ]);
     }
 }

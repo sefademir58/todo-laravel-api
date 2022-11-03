@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(TodoController::class)->group(function() {
     Route::get('/list', 'index');
     Route::post('/add', 'store');
-    Route::get('/show/{id}','show');
+    Route::put('/todo/{id}/completed/{status}','status');
     Route::put('/edit/{id}', 'update');
     Route::delete('/delete/{id}', 'destroy');
 });

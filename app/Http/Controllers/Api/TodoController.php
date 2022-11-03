@@ -43,9 +43,12 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function status($id, $completed)
     {
-        $todo= Todo::find($id);
+        $todo= Todo::findOrFail($id);
+        $todo->status= $completed == "true" ? 'Tamamlandı' : 'Tamamlanmadı';
+        
+        $todo->save();
         return $todo;
     }
 
@@ -58,12 +61,23 @@ class TodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $todo= Todo::findOrFail($request->id);
-        $todo->title= $request->title;
-        $todo->content= $request->content;
-        $todo->status= $request->status;
-        
+        $title = $request->title;
+        $content = $request->content;
+        $status = $request->status;
 
+        $todo= Todo::findOrFail($request->id);
+        if ($title) {
+            $todo->title= $request->title;
+        } else if ($content) {
+            $todo->content= $request->content;
+        } else if ($status) {
+            $todo->status= $request->status;
+        } else {
+            $todo->title= $request->title;
+            $todo->content= $request->content;
+            $todo->status= $request->status;
+        }
+        
         $todo->save();
         return $todo;
     }
