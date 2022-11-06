@@ -31,4 +31,5 @@ Route::controller(TodoController::class)->group(function() {
 Route::controller(UserController::class)->group(function() {
     Route::get('/login', 'login');
     Route::post('/register', 'register');
+    Route::post('/logout', 'logout');
 });
